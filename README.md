@@ -126,7 +126,7 @@ const Config = {
   
   export default Config;
 ```
-create two folders models and Graphql under server directory
+create two folders ```models``` and ```Graphql``` under server directory
 
 Write follwing code in users.js under Graphql folder
 ```js
@@ -400,7 +400,7 @@ export const DELETE_USER = gql`
   }
 `;
 ```
-create a folder Compnents under src folder
+create a folder ```Compnents``` under src folder
 
 write following code in Home.js under Components folder
 ```js
