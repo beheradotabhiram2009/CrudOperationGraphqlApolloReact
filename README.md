@@ -249,4 +249,5 @@ const userModel = (sequelize, DataTypes) => {
 
 export default userModel;
 ```
-###type node index.js to check if the server is running
+type ```node index.js``` to check if the server is running
+
