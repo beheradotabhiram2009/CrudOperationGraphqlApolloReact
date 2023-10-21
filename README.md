@@ -1,4 +1,4 @@
-## CrudOperationGraphqlApolloReact
+### CrudOperationGraphqlApolloReact
 Demo Example provides crud operation using graphql apollo react from MySQL database using image and date field
 
 Download and install mysql 8.1
