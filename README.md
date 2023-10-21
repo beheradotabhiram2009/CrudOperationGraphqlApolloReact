@@ -258,7 +258,7 @@ const userModel = (sequelize, DataTypes) => {
 
 export default userModel;
 ```
-type ```node index.js``` to check if the server is running
+type ```node index.js``` to check if the server is running correctly
 To create react client application type this command under crudApp folder
 ```
 npx create-react-app client
