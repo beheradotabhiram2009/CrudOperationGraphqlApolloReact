@@ -1,5 +1,5 @@
 ## CrudOperationGraphqlApolloReact
-Demo Example provides crud operation using graphql apollo from MySQL database using image and date field
+Demo Example provides crud operation using graphql apollo react from MySQL database using image and date field
 
 Download and install mysql 8.1
 
@@ -7,11 +7,11 @@ create a database userapp and a table users by using following sql
 ```sql
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `job_title` varchar(45) DEFAULT NULL,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `job_title` varchar(45),
   `content` longtext,
-  `joining_date` date DEFAULT NULL,
+  `joining_date` date,
   `mime` varchar(20),
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
