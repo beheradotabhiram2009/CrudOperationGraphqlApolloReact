@@ -26,16 +26,21 @@ run windows powershell/ command prompt
 Create a directory server, change to server directory
 
 Write the following commands in sequence : 
-
 ```npm init```
-```npm i @apollo/server```
-```npm i express```
-```npm install cors```
-```npm install mysql2```
-```npm i http```
-```npm i sequelize```
-```npm install graphql```
 
+```npm i @apollo/server```
+
+```npm i express```
+
+```npm i cors```
+
+```npm i mysql2```
+
+```npm i http```
+
+```npm i sequelize```
+
+```npm i graphql```
 type package.json (You can see all the packages installed)
 
 add following in package.json for using ES6
