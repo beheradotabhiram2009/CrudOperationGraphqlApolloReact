@@ -1,6 +1,8 @@
 ## CrudOperationGraphqlApolloReact
 Demo Example provides crud operation using graphql apollo from MySQL database using image and date field
+
 Download and install mysql 8.1
+
 create a database userapp and a table users by using following sql
 ```sql
 CREATE TABLE `users` (
@@ -20,7 +22,9 @@ insert sample rows.
 download and install node.js 
 
 run windows powershell/ command prompt
+
 Create a directory server, change to server directory
+
 Write the following commands in sequence : 
 ### npm init
 ### npm i @apollo/server
