@@ -23,7 +23,7 @@ download and install node.js
 
 run windows powershell/ command prompt
 
-Create a directory server, change to server directory
+Create a directory server under crudApp folder, change to server directory
 
 Write the following commands in sequence :
 
@@ -43,7 +43,7 @@ Write the following commands in sequence :
 
 ```npm i graphql```
 
-```type package.json``` (to see all the packages installed)
+```type package.json``` (to see all the installed packages)
 
 add following in package.json for using ES6
 ```json
@@ -259,4 +259,22 @@ const userModel = (sequelize, DataTypes) => {
 export default userModel;
 ```
 type ```node index.js``` to check if the server is running
+To create react client application type this command under crudApp folder
+```
+npx create-react-app client
+```
+ignore the errors change to client directory
+
+Write the following commands in sequence :
+```npm i @apollo/client```
+
+```npm i react-router-dom```
+
+```npm i react-bootstrap```
+
+```npm i bootstrap```
+
+```npm i react-datepicker```
+
+
 
