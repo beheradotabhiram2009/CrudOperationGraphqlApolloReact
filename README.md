@@ -25,7 +25,8 @@ run windows powershell/ command prompt
 
 Create a directory server, change to server directory
 
-Write the following commands in sequence : 
+Write the following commands in sequence :
+
 ```npm init```
 
 ```npm i @apollo/server```
@@ -41,7 +42,8 @@ Write the following commands in sequence :
 ```npm i sequelize```
 
 ```npm i graphql```
-type package.json (You can see all the packages installed)
+
+```type package.json``` (to see all the packages installed)
 
 add following in package.json for using ES6
 ```json
