@@ -18,7 +18,7 @@ const userModel = (sequelize, DataTypes) => {
 		},
     	job_title: DataTypes.STRING,
     	joining_date: DataTypes.DATE,
-    	content: DataTypes.TEXT('long'),
+    	content: DataTypes.TEXT('medium'),
 		mime: DataTypes.STRING,
 		}, {
 		tableName: 'users',
