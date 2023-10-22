@@ -61,7 +61,7 @@ import {typeDefs, resolvers} from './Graphql/users.js';
 import db from './database.js';
 
 const app = express();
-app.use(express.json({ limit: '15gb' }));
+app.use(express.json({ limit: '15mb' }));
 app.use(cors());
 const httpServer = http.createServer(app);
 const server = new ApolloServer({
@@ -248,7 +248,7 @@ const userModel = (sequelize, DataTypes) => {
 		},
     	job_title: DataTypes.STRING,
     	joining_date: DataTypes.DATE,
-    	content: DataTypes.TEXT('long'),
+    	content: DataTypes.TEXT('medium'),
 		mime: DataTypes.STRING,
 		}, {
 		tableName: 'users',
