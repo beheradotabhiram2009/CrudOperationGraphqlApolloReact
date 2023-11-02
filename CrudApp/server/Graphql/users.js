@@ -39,13 +39,12 @@ const resolverDate = {
         job_title:String
         joining_date:Date
         content:String
-        mime:String
     }
     type Mutation {
       updateUser(id: Int, name: String, email: String, job_title: String, 
-        joining_date: Date, content: String, mime: String): User,
+        joining_date: Date, content: String): User,
       createUser(name: String, email: String, job_title: String, joining_date: Date, 
-        content: String, mime: String): User,
+        content: String): User,
       deleteUser(id: Int): Int
     }
 `;
@@ -65,8 +64,7 @@ export const resolvers = {
           job_title:args.job_title, 
           joining_date:args.joining_date, 
           content:args.content,
-          mime:args.mime,
-        });
+         });
       } catch (err) {alert(err);}
     },  
 
@@ -85,8 +83,7 @@ export const resolvers = {
           email:args.email, 
           job_title:args.job_title, 
           joining_date:args.joining_date,
-          content:args.content,
-          mime:args.mime},
+          content:args.content},
           {where: { id:args.id }
         });
       } catch (err) {alert(err);}
