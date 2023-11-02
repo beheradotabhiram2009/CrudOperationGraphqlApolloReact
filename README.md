@@ -272,6 +272,8 @@ http://localhost:4000/graphql
 
 ![image](https://github.com/beheradotabhiram2009/CrudOperationGraphqlApolloReact/assets/25347074/f427667e-819b-4850-b190-7c903fe62f9a)
 
+![image](https://github.com/beheradotabhiram2009/CrudOperationGraphqlApolloReact/assets/25347074/30d06f30-8785-47d1-86d7-fcd3b1f56641)
+
 To create react client application type this command under crudApp folder
 ```
 npx create-react-app client
