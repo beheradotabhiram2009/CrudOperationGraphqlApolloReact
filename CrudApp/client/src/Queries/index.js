@@ -8,8 +8,7 @@ export const GET_USERS = gql`
       email,
       job_title,
       joining_date,
-      content,
-      mime
+      content
     }
   }
 `;
@@ -22,17 +21,16 @@ export const VIEW_USER = gql`
       email,
       job_title,
       joining_date,
-      content,
-      mime
+      content
     }
   }
 `;
 
 export const ADD_USER = gql`
   mutation($name: String, $email: String, $job_title: String, 
-    $joining_date: Date, $content: String, $mime: String) {
+    $joining_date: Date, $content: String) {
     createUser (name: $name, email: $email, job_title: $job_title, 
-      joining_date: $joining_date, content: $content, mime: $mime)
+      joining_date: $joining_date, content: $content)
     {
       id
       name
@@ -40,16 +38,15 @@ export const ADD_USER = gql`
       job_title
       joining_date
       content
-      mime
     }
   }
 `;
 
 export const EDIT_USER = gql`
   mutation($id: Int, $name: String, $email: String, $job_title: String, 
-    $joining_date: Date, $content: String, $mime: String) {
+    $joining_date: Date, $content: String) {
     updateUser(id: $id, name: $name, email: $email, job_title: $job_title, 
-      joining_date: $joining_date, content: $content, mime: $mime)
+      joining_date: $joining_date, content: $content)
     {
       id
       name
@@ -57,7 +54,6 @@ export const EDIT_USER = gql`
       job_title
       joining_date
       content
-      mime
     }
   }
 `;
