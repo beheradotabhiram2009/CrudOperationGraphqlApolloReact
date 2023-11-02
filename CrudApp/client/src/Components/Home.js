@@ -27,8 +27,8 @@ function Home() {
 	}
 	
 	return (
-		<div style={{marginLeft:'5rem', marginRight:'5em'}}>
-			 <p>{/* {JSON.stringify(allusers.data, null, 2)} */}</p>
+		<div style={{marginLeft: '5em', marginRight: '5em'}}>
+			 {/* <p>{JSON.stringify(allusers.data, null, 2)}</p> */}
 			<Table striped bordered hover size="sm">
 				<thead>
 					<tr>
@@ -51,7 +51,7 @@ function Home() {
 							<td>{user.job_title}</td>
 							<td>{user.email}</td>
 							<td>{new Date(user.joining_date).toDateString()}</td>
-					    	<td><img src= {'data:'+user.mime+';base64,'+user.content} 
+					    	<td><img src= {user.content} 
 								width={50} height={50} alt='' /></td>
 							<td>
 								<Link to={`/edit`}>
