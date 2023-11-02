@@ -1,50 +1,69 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ADD_USER } from '../Queries';
 import { useMutation } from '@apollo/client';
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, ProgressBar } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-import { toDateStr, fileToBase64 } from '../Convert';
+import { toDateStr } from '../Convert';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Create() {
+const  Create = () => {
+    const [files, setFiles] = useState([]);
+    const [progress, setProgress] = useState(0);
+    const [fr,]=useState(new FileReader());
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [jobTitle, setJobTitle] = useState('');
     const [content, setContent] = useState('');
     const [joiningDate, setJoiningDate] = useState('');
-    const [mime, setMime] = useState('');
-
+           
     let history = useNavigate();
     const [ addUser ] = useMutation(ADD_USER,);
+            
+    const [loadPromise = async ()=> {
+        return new Promise((resolve, reject) => { 
+            fr.onerror = (err) => reject(err);  
+            fr.onload = () => resolve(fr.result);
+            fr.onprogress = (event) => {
+                setTimeout(()=>{
+                    var pr = Math.round(100*(event.loaded / event.total));
+                    if (pr > progress && pr <= 100) {setProgress(pr);}            
+                },1);
+            }      
+        });
+    },] = useState();
+    
+    useEffect(() => {
+       (async () => {
+        if(files && files[0]) {
+            var result = await loadPromise();
+            setContent(result);
+        }})();
+    },[files, loadPromise]);
 
-    const changeContent = (e) => {
-        if (e.target.files[0]) {
-            const file = e.target.files[0];
-            setMime('image/'+file.name.split('.')[1]);
-            fileToBase64(file, function(base64Data){
-                console.log(base64Data);
-                setContent(base64Data.split(',')[1]);
-            })
+    const handleChange = async (e) =>{
+        if(e.target && e.target.files) {
+            setFiles(e.target.files);
+            setProgress(0);
+            fr.readAsDataURL(e.target.files[0]);
         }
-    }
-
+    } 
     const handelSubmit = async (e) => {
-        e.preventDefault();  // Prevent 
-        let b = name, c=email, d=jobTitle, f=joiningDate, g=content,
-        h=mime;  //sent to server
+        e.preventDefault();  // Prevent reload
+        let b = name, c=email, d=jobTitle, f=joiningDate, g=content;  
+        //sent to server
         try{
             await addUser({variables:{name:b, email:c, job_title:d, 
-                joining_date:f, content:g, mime:h}})
-            history('/') //redirect to home
+                joining_date:f, content:g}});
+            history('/'); //redirect to home
         }catch(error){alert('Add Error: '+error)}
     }
     return (
         <div >
-            <Form className="d-grid gap-2" style=
-                {{marginLeft:'25rem', marginRight:'25em', marginTop:'2rem'}}>
+            <Form className="d-grid gap-2" 
+                style={{marginLeft: '25em', marginRight: '25em', marginTop: '2em'}}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Control onChange={e => setName(e.target.value)}
                         type="text" placeholder="Enter Name" required />
@@ -65,10 +84,10 @@ function Create() {
                 </div>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPhoto">
-                    <input onChange={(e)=>
-                        {if(e.target && e.target.files) changeContent(e)}}
-                        type="file" accept=".jpg, .jpeg, .png"/>
+                    <input onChange={async (e) => await handleChange(e)}
+                        type="file" accept=".jpg, .jpeg, .png, .mp4, .webm" />
                 </Form.Group>
+                <ProgressBar now={progress} label={`${progress}%`} id="pb"></ProgressBar>
                 <div>
                     <Link to='/'>
                         <Button variant="info" size="md">
@@ -80,12 +99,10 @@ function Create() {
                         variant="primary" type="submit">
                         Submit
                     </Button>
-                    <img src={'data:'+mime+';base64,'+content} 
-                        width={75} height={75} alt='' />
+                    <img src={content} width={75} height={75} alt='' />
                 </div>
             </Form>
         </div>
     )
 }
-  
-export default Create
+ export default Create
