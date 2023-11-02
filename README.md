@@ -32,6 +32,8 @@ Write the following commands in sequence :
 
 ```npm i express```
 
+```npm i nodemon```
+
 ```npm i cors```
 
 ```npm i mysql2```
@@ -47,6 +49,10 @@ Write the following commands in sequence :
 add following in package.json for using ES6
 ```json
 "type": "module",
+```
+add following in script section of package.json for auto start of server
+```
+"dev": "nodemon index.js"
 ```
 Write follwing code in index.js under server directory
 ```js
@@ -253,7 +259,15 @@ const userModel = (sequelize, DataTypes) => {
 
 export default userModel;
 ```
-type ```node index.js``` to check if the server is running correctly
+type ```npm run dev``` to check if the server is running correctly
+
+you can test the queries and mutations by browsing 
+```
+http://localhost:4000/graphql
+```
+
+![image](https://github.com/beheradotabhiram2009/CrudOperationGraphqlApolloReact/assets/25347074/2328b736-97bd-4d33-b274-07a330360bbf)
+
 
 To create react client application type this command under crudApp folder
 ```
