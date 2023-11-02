@@ -1,5 +1,5 @@
 ### CrudOperationGraphqlApolloReact
-Demo Example provides crud operation using graphql apollo react from MySQL database using image and date field
+Demo Example provides crud operation using graphql apollo react from MySQL database using image and date field showing progres bar
 
 Download and install mysql 8.1
 
@@ -12,8 +12,7 @@ CREATE TABLE `users` (
   `job_title` varchar(45),
   `content` longtext,
   `joining_date` date,
-  `mime` varchar(20),
-  PRIMARY KEY (`id`),
+   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 );
 ```
@@ -171,13 +170,12 @@ const resolverDate = {
         job_title:String
         joining_date:Date
         content:String
-        mime:String
     }
     type Mutation {
       updateUser(id: Int, name: String, email: String, job_title: String, 
-        joining_date: Date, content: String, mime: String): User,
+        joining_date: Date, content: String): User,
       createUser(name: String, email: String, job_title: String, joining_date: Date, 
-        content: String, mime: String): User,
+        content: String): User,
       deleteUser(id: Int): Int
     }
 `;
@@ -197,8 +195,7 @@ export const resolvers = {
           job_title:args.job_title, 
           joining_date:args.joining_date, 
           content:args.content,
-          mime:args.mime,
-        });
+          });
       } catch (err) {alert(err);}
     },  
 
@@ -217,8 +214,7 @@ export const resolvers = {
           email:args.email, 
           job_title:args.job_title, 
           joining_date:args.joining_date,
-          content:args.content,
-          mime:args.mime},
+          content:args.content},
           {where: { id:args.id }
         });
       } catch (err) {alert(err);}
@@ -249,7 +245,6 @@ const userModel = (sequelize, DataTypes) => {
     	job_title: DataTypes.STRING,
     	joining_date: DataTypes.DATE,
     	content: DataTypes.TEXT('medium'),
-		mime: DataTypes.STRING,
 		}, {
 		tableName: 'users',
 		timestamps: false
@@ -341,8 +336,7 @@ export const GET_USERS = gql`
       job_title,
       joining_date,
       content,
-      mime
-    }
+      }
   }
 `;
 
@@ -355,16 +349,15 @@ export const VIEW_USER = gql`
       job_title,
       joining_date,
       content,
-      mime
-    }
+      }
   }
 `;
 
 export const ADD_USER = gql`
   mutation($name: String, $email: String, $job_title: String, 
-    $joining_date: Date, $content: String, $mime: String) {
+    $joining_date: Date, $content: String) {
     createUser (name: $name, email: $email, job_title: $job_title, 
-      joining_date: $joining_date, content: $content, mime: $mime)
+      joining_date: $joining_date, content: $content)
     {
       id
       name
@@ -372,16 +365,15 @@ export const ADD_USER = gql`
       job_title
       joining_date
       content
-      mime
     }
   }
 `;
 
 export const EDIT_USER = gql`
   mutation($id: Int, $name: String, $email: String, $job_title: String, 
-    $joining_date: Date, $content: String, $mime: String) {
+    $joining_date: Date, $content: String) {
     updateUser(id: $id, name: $name, email: $email, job_title: $job_title, 
-      joining_date: $joining_date, content: $content, mime: $mime)
+      joining_date: $joining_date, content: $content)
     {
       id
       name
@@ -389,8 +381,7 @@ export const EDIT_USER = gql`
       job_title
       joining_date
       content
-      mime
-    }
+      }
   }
 `;
 
