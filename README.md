@@ -266,7 +266,7 @@ you can test the queries and mutations by browsing
 http://localhost:4000/graphql
 ```
 
-![image](https://github.com/beheradotabhiram2009/CrudOperationGraphqlApolloReact/assets/25347074/2328b736-97bd-4d33-b274-07a330360bbf)
+![image](https://github.com/beheradotabhiram2009/CrudOperationGraphqlApolloReact/assets/25347074/f0177767-3f81-4db8-9824-586285f9ef88)
 
 ![image](https://github.com/beheradotabhiram2009/CrudOperationGraphqlApolloReact/assets/25347074/5b1a2595-950b-408d-bc21-22ac9f0e7bfb)
 
