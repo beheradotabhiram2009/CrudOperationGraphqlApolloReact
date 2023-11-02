@@ -10,7 +10,7 @@ CREATE TABLE `users` (
   `name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `job_title` varchar(45),
-  `content` longtext,
+  `content` mediumtext,
   `joining_date` date,
    PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
