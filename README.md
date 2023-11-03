@@ -585,7 +585,7 @@ const  Create = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPhoto">
                     <input onChange={async (e) => await handleChange(e)}
-                        type="file" accept=".jpg, .jpeg, .png, .mp4, .webm" />
+                        type="file" accept=".jpg, .jpeg, .png" />
                 </Form.Group>
                 <ProgressBar now={progress} label={`${progress}%`} id="pb"></ProgressBar>
                 <div>
