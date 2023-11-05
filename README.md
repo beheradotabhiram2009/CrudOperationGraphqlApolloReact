@@ -504,7 +504,7 @@ import { useMutation } from '@apollo/client';
 import { Button, Form, ProgressBar } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-import { toDateStr } from '../Convert';
+import  { readFile, toDateStr } from '../Convert';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -522,32 +522,20 @@ const  Create = () => {
     let history = useNavigate();
     const [ addUser ] = useMutation(ADD_USER,);
             
-    const [loadPromise = async ()=> {
-        return new Promise((resolve, reject) => { 
-            fr.onerror = (err) => reject(err);  
-            fr.onload = () => resolve(fr.result);
-            fr.onprogress = (event) => {
-                setTimeout(()=>{
-                    var pr = Math.round(100*(event.loaded / event.total));
-                    if (pr > progress && pr <= 100) {setProgress(pr);}            
-                },1);
-            }      
-        });
-    },] = useState();
-    
     useEffect(() => {
        (async () => {
         if(files && files[0]) {
-            var result = await loadPromise();
+            var result = await readFile(fr, progress, setProgress)
+            .catch((err) => console.error(err));
             setContent(result);
         }})();
-    },[files, loadPromise]);
+    },[files, fr, progress]);
 
     const handleChange = async (e) =>{
         if(e.target && e.target.files) {
             setFiles(e.target.files);
             setProgress(0);
-            fr.readAsDataURL(e.target.files[0]);
+            fr.readAsDataURL(e.target.files[0]); 
         }
     } 
     const handelSubmit = async (e) => {
@@ -585,7 +573,7 @@ const  Create = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPhoto">
                     <input onChange={async (e) => await handleChange(e)}
-                        type="file" accept=".jpg, .jpeg, .png" />
+                        type="file" accept=".jpg, .jpeg, .png, .mp4, .webm" />
                 </Form.Group>
                 <ProgressBar now={progress} label={`${progress}%`} id="pb"></ProgressBar>
                 <div>
@@ -615,7 +603,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { EDIT_USER, VIEW_USER } from '../Queries';
 import { Button, Form, ProgressBar } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { toDateStr } from '../Convert';
+import { toDateStr, readFile } from '../Convert';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -654,28 +642,15 @@ function  Edit() {
         }
     },[initialise, initialiseData]);
 
-    const [loadPromise = async ()=> {
-        return new Promise((resolve, reject) => { 
-            fr.onerror = (err) => reject(err);  
-            fr.onload = () => resolve(fr.result);
-            fr.onprogress = (event) => {
-                setTimeout(()=>{
-                    var pr = Math.round(100*(event.loaded / event.total));
-                    if (pr > progress && pr <= 100) {setProgress(pr);}            
-                },1);
-            }      
-        });
-    },] = useState();
-
     useEffect(() => {
         (async () => {
-            if(files && files[0]) {
-                var result = await loadPromise();
-                setContent(result);
-            }
-        })();
-    },[files, loadPromise]); 
-
+         if(files && files[0]) {
+             var result = await readFile(fr, progress, setProgress)
+             .catch((err) => console.error(err));
+             setContent(result);
+         }})();
+     },[files, fr, progress]);
+    
     const [changeUser] = useMutation(EDIT_USER,)
     
     if(loading) return <Fragment>loading...</Fragment>
