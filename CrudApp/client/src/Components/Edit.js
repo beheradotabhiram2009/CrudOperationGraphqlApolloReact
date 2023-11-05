@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { EDIT_USER, VIEW_USER } from '../Queries';
 import { Button, Form, ProgressBar } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { toDateStr } from '../Convert';
+import { toDateStr, readFile } from '../Convert';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -43,28 +43,15 @@ function  Edit() {
         }
     },[initialise, initialiseData]);
 
-    const [loadPromise = async ()=> {
-        return new Promise((resolve, reject) => { 
-            fr.onerror = (err) => reject(err);  
-            fr.onload = () => resolve(fr.result);
-            fr.onprogress = (event) => {
-                setTimeout(()=>{
-                    var pr = Math.round(100*(event.loaded / event.total));
-                    if (pr > progress && pr <= 100) {setProgress(pr);}            
-                },1);
-            }      
-        });
-    },] = useState();
-
     useEffect(() => {
         (async () => {
-            if(files && files[0]) {
-                var result = await loadPromise();
-                setContent(result);
-            }
-        })();
-    },[files, loadPromise]); 
-
+         if(files && files[0]) {
+             var result = await readFile(fr, progress, setProgress)
+             .catch((err) => console.error(err));
+             setContent(result);
+         }})();
+     },[files, fr, progress]);
+    
     const [changeUser] = useMutation(EDIT_USER,)
     
     if(loading) return <Fragment>loading...</Fragment>
